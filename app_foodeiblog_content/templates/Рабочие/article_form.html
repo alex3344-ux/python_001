@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+
+
+{% block title %}
+    Редактировать рецепт
+{% endblock title %}
+    
+
+{% block content %}
+<div class="container-xxl py-5 wow fadeInUp mb-3 mt-3 ps-5 pe-5 row" data-wow-delay="0.1s">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Отправить</button>
+
+    </form>
+</div>
+{% endblock content %}
+
+
+<a href="{% url 'app_foodeiblog_content:article_list.html' %}" class="btn btn-secondary">Назад</a>
+    

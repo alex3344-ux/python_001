@@ -1,0 +1,50 @@
+{% extends 'layout/base.html' %}
+{% block title %} Отзывы {% endblock title %}
+{% block content %}
+<table class="mb-3 mt-3 table table-info table-striped">
+  <thead>
+    <th>№</th>
+    <th>Название рецепта</th>
+    <th>Автор</th>
+    <th>Дата создания</th>
+    <th>Дата изменения</th>
+    <th>Ингредиенты</th>
+    <th>Изображение</th>
+    <th>Описание</th>
+    <th>Дата рождения автора</th>
+    <th>Телефон</th>
+    <th>E-MAIL автора</th>
+    <th>Разрешение на показ</th>
+  </thead>
+  <tbody>
+  {% for article_item in articles %}
+      <tr>
+        <td>
+          <a
+            href=""
+            >{{ article_item.pk }}</a
+          >
+        </td>
+        <td>{{ article_item.title }}</td>
+        <td>{{ article_item.author }}</td>
+        <td>{{ article_item.created_at }}</td>
+        <td>{{ article_item.updated_at }}</td>
+        <td>{{ article_item.ingredients }}</td>
+        <td><img src="{{ article_item.image.url }}" style="max-width: 300px;" alt=""></td>
+        <td>{{ article_item.text }}</td>
+        <td>{{ article_item.author_birth_day }}</td>
+        <td>{{ article_item.author_phone }}</td>
+        <td>{{ article_item.author_email }}</td>
+        <td>{{ article_item.article_permission }}</td>
+
+        {% if user.is_authenticated %}
+            <td><a class="btn btn-secondary" href="{% url 'app_foodeiblog_content:article_update' article_item.pk %}">Обновить</a></td>
+            <td><a class="btn btn-danger" href="{% url 'app_foodeiblog_content:article_delete' article_item.pk %}">Удалить</a></td>
+        {% endif %}
+      </tr>
+
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
